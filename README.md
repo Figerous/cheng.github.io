@@ -1,168 +1,43 @@
-<!DOCTYPE html>
-<html>
+<!--
+ * AyagawaSeirin's Page
+ * Last Update: 2020-02-05
+ * GitHub: https://github.com/AyagawaSeirin/
+ * Made with love by AyagawaSeirin [https://qwq.best/]
+ * 此个人主页运行于GithubPages，如果你也想使用，在我的公开仓库内即可找到源码。您可以任意修改，但请注明本原作者。
+-->
+<html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<title>能不能好好说话？ - www.x6d.com/www.x6k.com</title>
-	<link rel="stylesheet" href="base.css">
-	<link rel="stylesheet" href="document.css">
-	<meta name="viewport" content="width=device-width,user-scalable=0">
-	<meta name="discription" content="拼音首字母缩写释义工具">
+    <meta charset="utf-8">
+    <title>强忍着泪水笑着说再见 | 让我们永远在梦中相会吧</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AyagawaSeirin/homepage@double/mdui/css/mdui.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AyagawaSeirin/homepage@double/assets/css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AyagawaSeirin/homepage@double/assets/css/index.css">
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/AyagawaSeirin/homepage@double/assets/img/logo-circul-100.png">
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?c8493223ca0fc5718b7da621552fdd73";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
 </head>
 <body>
-	<div id="el">
-		<textarea v-model="text" placeholder="输入含有首字母缩写的文字" @input="nbnhhsh"></textarea>
-
-		<div class="nbnhhsh-box nbnhhsh-box-doc" v-if="show">
-			<div class="nbnhhsh-loading" v-if="loading">
-				加载中…
-			</div>
-			<div class="nbnhhsh-tag-list" v-else-if="tags.length">
-				<div class="nbnhhsh-tag-item" v-for="tag in tags">
-					<h4>{{tag.name}}</h4>
-					<div class="nbnhhsh-tran-list" v-if="tag.trans">
-						<span class="nbnhhsh-tran-item" v-for="tran in transArrange(tag.trans)">
-							{{tran.text}}<sub v-if="tran.sub">{{tran.sub}}</sub>
-						</span>
-					</div>
-					<div class="nbnhhsh-notran-box" v-else-if="tag.trans===null">
-						无对应文字
-					</div>
-					<div v-else-if="tag.inputting && tag.inputting.length !==0">
-						<div class="nbnhhsh-inputting-list">
-							<h5>有可能是</h5>
-							<span class="nbnhhsh-inputting-item" v-for="input in tag.inputting">{{input}}</span>
-						</div>
-					</div>
-					<div class="nbnhhsh-notran-box" v-else @click.prevent="submitTran(tag.name)">
-						尚未录入，我来提交对应文字
-					</div>
-					<a v-if="tag.trans!==null" @click.prevent="submitTran(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
-				</div>
-			</div>
-			<div class="nbnhhsh-loading" v-else>
-				没有匹配到拼音首字母缩写
-			</div>
-
-		</div>
-	</div>
-	<div class="content-box">
-		<h2>例文</h2>
-		<blockquote>
-			<p>草这个tmd网络世界我真的太恨缩写了。</p>
-			<p>
-				随便点开一条微博，艺人名字要缩写，gzs工作室也要缩写，gc广场他妈的也是缩写，hgr老子猜了老半天，百度一下才知道是韩国人，拳头硬了。<br>
-				讲个话开头也缩写，srds虽然但是，yjgj有句港句，bbl求求了。（这个谁看得出来你妈的）<br>
-				夸人骂人也都缩写，yjjc一骑绝尘，wdcc弯道超车，yygq阴阳怪气，myss美颜盛世，rnb我也猜了半天，最后被告知是really牛b的意思，哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈又硬了呢。<br>
-				最要命的还不是这些，我刚刚看到网友评价什么什么他jb的什么，我以为jb就是jb的意思吧，但联系上下文句子又读不通，想了一分钟，哇，原来jb是姜滨的缩写啊！<br>
-				jb＝姜滨，我离开了。</p>
-			<p>@你里哥哥</p>
-		</blockquote>
-
-		<h2>为什么做这东西？</h2>
-		<p>社交平台上通过拼音首字母缩写指代特定词句的情况越来越多，为了让更多人能勉强理解这一门另类沟通方式、做了这一个划词转义工具。</p>
-
-		<h2>什么是用户脚本？</h2>
-		<p>用户脚本是一段代码，它们能够优化您的网页浏览体验。安装之后，有些脚本能为网站添加新的功能，有些能使网站的界面更加易用，有些则能隐藏网站上烦人的部分内容。用户脚本都是由用户编写并向全世界发表的，您可以免费安装，轻松体验。</p>
-		<p>安装过程可参考 <a href="https://greasyfork.org/zh-CN/#home-step-1" target="_blank">https://greasyfork.org/zh-CN/</a> 首页的，<b>第一步：安装一个用户脚本管理器</b> 章节</p>
-
-		<h2>如何安装网页划词释义用户脚本？</h2>
-		<p>安装好用户脚本浏览器插件之后，访问 <a href="nbnhhsh.user.js">nbnhhsh.user.js</a> 完成脚本安装</p>
-		<blockquote>
-			<p>脚本版本目前会在 <b>微博</b>、<b>贴吧</b>、<b>哔哩哔哩</b> 页面下运行，划词时会提交所选文字以用于转义。</p>
-		</blockquote>
-
-		<h2>如何在更多网站上使用这个用户脚本？</h2>
-		<p>在对应的用户脚本配置里可以设置 <b>用户匹配</b>，添加对应 URL 规则即可。</p>
-
-		<h2>贡献词条</h2>
-		<p>在每一个词条右上角都有 <code>+</code> 图标的按钮，点击可以提交对应文字，审核后会整理录入。</p>
-
-		<h2>给个人网站添加划词转义？</h2>
-		<p>在需要划词转义的页面 <code>&lt;/body&gt;</code> 前，添加如下代码即可。</p>
-		<pre>&lt;script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"&gt;&lt;/script&gt;
-&lt;script src="https://lab.magiconch.com/nbnhhsh/nbnhhsh.user.js"&gt;&lt;/script&gt;</pre>
-
-		<h2>有更离谱的例文？</h2>
-		<p>请用任意方式发我！😖 比如 <a href="https://weibo.com/reiove" target="_blank">@卜卜口</a></p>
-
-		<h2>为什么被腾讯QQ以及微信提示包含不安全内容、被多人举报，以停止访问该网页？</h2>
-		<p>我也不清楚，也没地方问☹️</p>
-		<h2>打赏</h2>
-		<p>
-			<img src="sponsor.png" alt="支付宝打赏">
-		</p>
-
-		<h2>仓库地址</h2>
-		<p><a href="https://github.com/itorr/nbnhhsh" target="_blank">https://github.com/itorr/nbnhhsh</a></p>
-
-		<h2>GreasyFork</h2>
-		<p><a href="https://greasyfork.org/zh-CN/scripts/398555" target="_blank">https://greasyfork.org/zh-CN/scripts/398555</a></p>
-
-	</div>
-
-	<script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
-	<script src="nbnhhsh.user.js"></script>
-	<script>
-		let guessTimer;
-		const app = new Vue({
-			el,
-			data: {
-				text:'',
-				tags:[],
-				show:false,
-				loading:false,
-			},
-			methods: {
-				...Nbnhhsh,
-				nbnhhsh(){
-					let text = this.text;
-
-					app.show = !!text && /[a-z0-9]/i.test(text);
-
-					clearTimeout(guessTimer);
-
-					if(!app.show){
-						return;
-					}
-
-					guessTimer = setTimeout(()=>{
-						this.guess(text,data=>{
-							if(!data.length){
-								app.show = false;
-							}else{
-								app.tags = data;
-							}
-						});
-					},400);
-
-					// location.hash = text?'#/text/'+encodeURIComponent(text):'';
-				}
-			}
-		});
-
-		const searchStringArray = location.hash.substr(2).split('/');
-
-		const Search = {};
-
-		for(let i = 0;i<searchStringArray.length;i+=2){
-			Search[decodeURIComponent(searchStringArray[i])] = decodeURIComponent(searchStringArray[i+1]);
-		}
-
-
-		app.text = Search.text || '';
-
-		app.nbnhhsh();
-
-
-		const loadScript = (src,el) =>{
-			el = document.createElement('script');
-			el.src = src;
-			document.body.appendChild(el);
-		};
-
-		setTimeout(()=>{
-			loadScript('//s4.cnzz.com/z_stat.php?id=1278706389&web_id=1278706389');
-		},400);
-	</script>
+<div id="rin-bg"></div>
+<main id="rin-main">
+    <div id="rin-headimg"></div>
+    <div class="rin-name">某&nbsp;&nbsp;星&nbsp;&nbsp;成&nbsp;&nbsp凌;</div>
+    <div class="rin-description">「樱花 樱花 好想见你|不,我想现在就见到你|没关系 别哭,我是风正萦绕着你|我是星 会一直守护你|能和你相遇真是太好了|真的真的很好|必须离开了|对不起,不要问了,真的抱歉|我已经不能再留在你身边」</div>
+    <div class="rin-tr"></div>
+    <a class="mdui-btn mdui-btn-raised rin-btn mdui-text-capitalize" href="F">More</a>
+</main>
+<footer id="rin-footer">
+    <div>©2020 Seirin | Made with love by Seirin | BG: <a href="https://www.pixiv.net/artworks/56652667" id="bg-link" target="_blank">Pixiv</a></div>
+</footer>
+<script src="https://cdn.jsdelivr.net/gh/AyagawaSeirin/homepage@double/mdui/js/mdui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/AyagawaSeirin/homepage@double/assets/js/main.js"></script>
 </body>
 </html>
+	
