@@ -1,118 +1,163 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta content="width=device-width,maximum-scale=1.0,minimum-scale=1.0,initial-scale=1.0,user-scalable=no" name="viewport">
-<title>某成的博客 - 全网短视频无水印在线解析</title>
-<meta name="keywords" content="易搜影视,易搜,易搜解析,易搜助手,易搜无水印,无水印解析,短视频无水印,聚合无水印">
-<meta name="description" content="易搜助手是一款多功能聚合去水印平台,为网友提供免费在线去水印，给您全新的“悦享品质”体验。">
-<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<link href="public/style.css" rel="stylesheet">
-<script src="public/jquery.min.js"></script>
+	<meta charset="UTF-8">
+	<title>能不能好好说话？ - www.x6d.com/www.x6k.com</title>
+	<link rel="stylesheet" href="base.css">
+	<link rel="stylesheet" href="document.css">
+	<meta name="viewport" content="width=device-width,user-scalable=0">
+	<meta name="discription" content="拼音首字母缩写释义工具">
 </head>
 <body>
-<div class="header">
-	<div class="logo-header"><a href="./" title="易搜助手"><img src="public/logo.png"></a></div>
-</div>
-<div class="home_container">
-    <div class="wrap">
-	    <div class="wrap_background"></div>
-		<div class="wrap_search">
-		    <input type="text" id="url" placeholder="请将APP里复制的视频链接粘贴到这里" autocomplete="off">
-			<button type="submit" id="button">解析</button>
+	<div id="el">
+		<textarea v-model="text" placeholder="输入含有首字母缩写的文字" @input="nbnhhsh"></textarea>
+
+		<div class="nbnhhsh-box nbnhhsh-box-doc" v-if="show">
+			<div class="nbnhhsh-loading" v-if="loading">
+				加载中…
+			</div>
+			<div class="nbnhhsh-tag-list" v-else-if="tags.length">
+				<div class="nbnhhsh-tag-item" v-for="tag in tags">
+					<h4>{{tag.name}}</h4>
+					<div class="nbnhhsh-tran-list" v-if="tag.trans">
+						<span class="nbnhhsh-tran-item" v-for="tran in transArrange(tag.trans)">
+							{{tran.text}}<sub v-if="tran.sub">{{tran.sub}}</sub>
+						</span>
+					</div>
+					<div class="nbnhhsh-notran-box" v-else-if="tag.trans===null">
+						无对应文字
+					</div>
+					<div v-else-if="tag.inputting && tag.inputting.length !==0">
+						<div class="nbnhhsh-inputting-list">
+							<h5>有可能是</h5>
+							<span class="nbnhhsh-inputting-item" v-for="input in tag.inputting">{{input}}</span>
+						</div>
+					</div>
+					<div class="nbnhhsh-notran-box" v-else @click.prevent="submitTran(tag.name)">
+						尚未录入，我来提交对应文字
+					</div>
+					<a v-if="tag.trans!==null" @click.prevent="submitTran(tag.name)" class="nbnhhsh-add-btn" title="我来提交对应文字"></a>
+				</div>
+			</div>
+			<div class="nbnhhsh-loading" v-else>
+				没有匹配到拼音首字母缩写
+			</div>
+
 		</div>
 	</div>
-	<!-- 内容 -->
-	<div class="home_page">
-	    <div class="page_list">
-		    <div class="list_box">
-			    <div class="list_ico"><i class="fa fa-paw"></i></div>
-				<div class="list_title">一键解析</div>
-			</div>
-			<div class="list_box">
-			    <div class="list_ico"><i class="fa fa-safari"></i></div>
-				<div class="list_title">方便快捷</div>
-			</div>
-			<div class="list_box">
-			    <div class="list_ico"><i class="fa fa-gift"></i></div>
-				<div class="list_title">永久免费</div>
-			</div>
-			<div class="list_box">
-			    <div class="list_ico"><a href="tencent://message/?uin=1281546270" target="_blank" rel="nofollow"><i class="fa fa-qq"></i></a></div>
-				<div class="list_title">联系客服</div>
-			</div>
-		</div>
-		<!-- 公告 -->
-		<div class="page_notice">
-		    站点公告：<span>因某些不可抗拒的因素而关闭,在此感谢大家一直以来的支持....</span>
-		</div>
-		<div class="watermark">
-		    <div class="mark_title">使用说明</div>
-			<div class="mark_content">
-			    <p><em></em>暂支持抖茵丶快首丶火山丶微视等四类解析,后续还会增加。敬请期待...</p>
-				<p><em></em>打开视频APP，点开某个视频，点击分享按钮，在分享弹框中点击复制链接或通过分享到微信QQ等获取分享链接</p>
-				<p><em></em>将复制的分享链接粘贴到输入框进行解析</p>
-				<p><em></em>本站可以解析99%以上的视频。但如果视频作者上传的视频本身就有水印，这种水印暂时无法去除。如何判断原视频是否有水印？请查看该视频在相应的APP里播放时是否有水印。</p>
-				<p><em></em>视频被删除、被设置成私密、或在审核中都有可能导致解析失败。</p>
-			</div>
-		</div>	
-	</div>
-</div>
-<div class="footer">
-	<div class="link">
-		<div class="link_title">隔壁老王</div>
-		<div class="link_content">
-			<a href="https://www.x6d.com/" target="_blank" title="figerous.github.io">figerous.github.io</a>
-			<a href="http://www.xiaodao.biz/" target="_blank" title="网址发布页">网址发布页</a>
-		</div>
-	</div>
-	<div class="footer_content">
-		<p>
-			<a href="http://www.xiaodao.biz/" title="某成助手">某成助手</a>
-			<a href="http://www.beian.miit.gov.cn" target="_blank" rel="nofollow" title="备案号">备案号</a>
-			<a href="#" title="站点统计" target="_blank" rel="nofollow">站点统计</a>
+	<div class="content-box">
+		<h2>例文</h2>
+		<blockquote>
+			<p>
+				艺人名字要缩写，gzs工作室也要缩写，gc广场他妈的也是缩写，hgr老子猜了老半天，百度一下才知道是韩国人，拳头硬了。<br>
+				讲个话开头也缩写，srds虽然但是，yjgj有句港句，bbl求求了。（这个谁看得出来你妈的）<br>
+				夸人骂人也都缩写，yjjc一骑绝尘，wdcc弯道超车，yygq阴阳怪气，myss美颜盛世，rnb我也猜了半天，最后被告知是really牛b的意思。<br>
+			
+			<p>@你里哥哥</p>
+		</blockquote>
+
+		<h2>为什么做这东西？</h2>
+		<p>社交平台上通过拼音首字母缩写指代特定词句的情况越来越多，为了让更多人能勉强理解这一门另类沟通方式、做了这一个划词转义工具。</p>
+
+		<h2>什么是用户脚本？</h2>
+		<p>用户脚本是一段代码，它们能够优化您的网页浏览体验。安装之后，有些脚本能为网站添加新的功能，有些能使网站的界面更加易用，有些则能隐藏网站上烦人的部分内容。用户脚本都是由用户编写并向全世界发表的，您可以免费安装，轻松体验。</p>
+		<p>安装过程可参考 <a href="https://greasyfork.org/zh-CN/#home-step-1" target="_blank">https://greasyfork.org/zh-CN/</a> 首页的，<b>第一步：安装一个用户脚本管理器</b> 章节</p>
+
+		<h2>如何安装网页划词释义用户脚本？</h2>
+		<p>安装好用户脚本浏览器插件之后，访问 <a href="nbnhhsh.user.js">nbnhhsh.user.js</a> 完成脚本安装</p>
+		<blockquote>
+			<p>脚本版本目前会在 <b>微博</b>、<b>贴吧</b>、<b>哔哩哔哩</b> 页面下运行，划词时会提交所选文字以用于转义。</p>
+		</blockquote>
+
+		<h2>如何在更多网站上使用这个用户脚本？</h2>
+		<p>在对应的用户脚本配置里可以设置 <b>用户匹配</b>，添加对应 URL 规则即可。</p>
+
+		<h2>贡献词条</h2>
+		<p>在每一个词条右上角都有 <code>+</code> 图标的按钮，点击可以提交对应文字，审核后会整理录入。</p>
+
+		<h2>给个人网站添加划词转义？</h2>
+		<p>在需要划词转义的页面 <code>&lt;/body&gt;</code> 前，添加如下代码即可。</p>
+		<pre>&lt;script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://lab.magiconch.com/nbnhhsh/nbnhhsh.user.js"&gt;&lt;/script&gt;</pre>
+
+		<h2>有更离谱的例文？</h2>
+		<p>请用任意方式发我！😖 比如 <a href="https://space.bilibili.com/479104877" target="_blank">@卜卜口</a></p>
+
+		<h2>为什么被腾讯QQ以及微信提示包含不安全内容、被多人举报，以停止访问该网页？</h2>
+		<p>我也不清楚，也没地方问☹️</p>
 		</p>
-		<p>解析结果归相关平台所有，易搜解析不拥有其版权。</p>
+
+		<h2>仓库地址</h2>
+		<p><a href="https://github.com/itorr/nbnhhsh" target="_blank">https://github.com/itorr/nbnhhsh</a></p>
+
+		<h2>GreasyFork</h2>
+		<p><a href="https://greasyfork.org/zh-CN/scripts/398555" target="_blank">https://greasyfork.org/zh-CN/scripts/398555</a></p>
+
 	</div>
-</div>
-<div id="load"></div>
-<script>
-//协议判断 勿删
-var protocolStr = document.location.protocol;
-if(protocolStr == "http:"){
-    var meta = '<meta name="author" content="蓝优">';
-}else if(protocolStr == "https:"){
-	var meta = '<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />';
-}
-$(document).ready(function(){
-	$('#button').click(function (){		
-		var text = $('#url').val();
-		if (text == '') {
-			alert('域名不能为空');
-			return false;
-		}
-		$.ajax({			
-			url:'api.php',
-			type:'get', 
-			dataType:'json', 
-			data: {url:text},
-			beforeSend: function(){
-               $("#load").html('<div class="preloader"><div class="loader"></div></div>');
-			   $("head").prepend(meta);
-            },
-			success:function(data){
-				if (data.code == 200) {
-					var mkhtml = '<div class="mark_title">解析结果</div><div class="water_content"><p>'+data.title+'</p><div class="video"><iframe src="'+data.url+'" width="100%" height="100%" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay" referrerpolicy="no-referrer"></iframe></div><div class="download"><a href="'+data.pic+'" target="_blank" rel="nofollow">封面图片</a><a href="'+data.url+'" target="_blank" rel="nofollow" referrerpolicy="no-referrer">下载视频</a></div></div>';
-					$(".watermark").html(mkhtml);
-					$("#load").empty();
-				}else{
-					alert(data.msg);
-					$("#load").empty();
-				}	
+
+	<script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+	<script src="nbnhhsh.user.js"></script>
+	<script>
+		let guessTimer;
+		const app = new Vue({
+			el,
+			data: {
+				text:'',
+				tags:[],
+				show:false,
+				loading:false,
+			},
+			methods: {
+				...Nbnhhsh,
+				nbnhhsh(){
+					let text = this.text;
+
+					app.show = !!text && /[a-z0-9]/i.test(text);
+
+					clearTimeout(guessTimer);
+
+					if(!app.show){
+						return;
+					}
+
+					guessTimer = setTimeout(()=>{
+						this.guess(text,data=>{
+							if(!data.length){
+								app.show = false;
+							}else{
+								app.tags = data;
+							}
+						});
+					},400);
+
+					// location.hash = text?'#/text/'+encodeURIComponent(text):'';
+				}
 			}
 		});
-	});
-});
-</script>
+
+		const searchStringArray = location.hash.substr(2).split('/');
+
+		const Search = {};
+
+		for(let i = 0;i<searchStringArray.length;i+=2){
+			Search[decodeURIComponent(searchStringArray[i])] = decodeURIComponent(searchStringArray[i+1]);
+		}
+
+
+		app.text = Search.text || '';
+
+		app.nbnhhsh();
+
+
+		const loadScript = (src,el) =>{
+			el = document.createElement('script');
+			el.src = src;
+			document.body.appendChild(el);
+		};
+
+		setTimeout(()=>{
+			loadScript('//s4.cnzz.com/z_stat.php?id=1278706389&web_id=1278706389');
+		},400);
+	</script>
 </body>
 </html>
