@@ -8,7 +8,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <title>强忍着泪水笑着说再见 | 让我们永远在梦中相会吧</title>
+    <title>皮皮凛凛姬 | 绫川星凛 - 小刀娱乐网www.x6d.com/www.x6k.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AyagawaSeirin/homepage@double/mdui/css/mdui.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/AyagawaSeirin/homepage@double/assets/css/main.css">
@@ -28,10 +28,10 @@
 <div id="rin-bg"></div>
 <main id="rin-main">
     <div id="rin-headimg"></div>
-    <div class="rin-name">某&nbsp;&nbsp;星&nbsp;&nbsp;成&nbsp;&nbsp凌;</div>
-    <div class="rin-description">「樱花 樱花 好想见你|不,我想现在就见到你|没关系 别哭,我是风正萦绕着你|我是星 会一直守护你|能和你相遇真是太好了|真的真的很好|必须离开了|对不起,不要问了,真的抱歉|我已经不能再留在你身边」</div>
+    <div class="rin-name">綾&nbsp;&nbsp;川&nbsp;&nbsp;星&nbsp;&nbsp;凛</div>
+    <div class="rin-description">「其生若浮，其死若休」</div>
     <div class="rin-tr"></div>
-    <a class="mdui-btn mdui-btn-raised rin-btn mdui-text-capitalize" href="F">More</a>
+    <a class="mdui-btn mdui-btn-raised rin-btn mdui-text-capitalize" href="detaile.html">More</a>
 </main>
 <footer id="rin-footer">
     <div>©2020 Seirin | Made with love by Seirin | BG: <a href="https://www.pixiv.net/artworks/56652667" id="bg-link" target="_blank">Pixiv</a></div>
@@ -40,4 +40,3 @@
 <script src="https://cdn.jsdelivr.net/gh/AyagawaSeirin/homepage@double/assets/js/main.js"></script>
 </body>
 </html>
-	
